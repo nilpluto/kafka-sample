@@ -1,5 +1,7 @@
-package com.example.kafkasample.jar_consumer;
+package com.example.kafkasample.multi_kafka_consumer;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.kafka.clients.CommonClientConfigs;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -16,8 +18,9 @@ import java.util.Map;
 
 // Annotations
 @Configuration
-@Component
 @ConfigurationPropertiesScan
+@Getter
+@Setter
 public class KafkaConfig {
 
     private String bootstrapServers;
@@ -28,62 +31,6 @@ public class KafkaConfig {
     private String consumerAutoOffsetReset;
     private String consumerValueDeserializer;
 
-    public String getBootstrapServers() {
-        return bootstrapServers;
-    }
-
-    public void setBootstrapServers(String bootstrapServers) {
-        this.bootstrapServers = bootstrapServers;
-    }
-
-    public String getSecurityProtocol() {
-        return securityProtocol;
-    }
-
-    public void setSecurityProtocol(String securityProtocol) {
-        this.securityProtocol = securityProtocol;
-    }
-
-    public String getSaslMechanism() {
-        return saslMechanism;
-    }
-
-    public void setSaslMechanism(String saslMechanism) {
-        this.saslMechanism = saslMechanism;
-    }
-
-    public String getSaslJaasConfig() {
-        return saslJaasConfig;
-    }
-
-    public void setSaslJaasConfig(String saslJaasConfig) {
-        this.saslJaasConfig = saslJaasConfig;
-    }
-
-    public String getConsumerGroupId() {
-        return consumerGroupId;
-    }
-
-    public void setConsumerGroupId(String consumerGroupId) {
-        this.consumerGroupId = consumerGroupId;
-    }
-
-    public String getConsumerAutoOffsetReset() {
-        return consumerAutoOffsetReset;
-    }
-
-    public void setConsumerAutoOffsetReset(String consumerAutoOffsetReset) {
-        this.consumerAutoOffsetReset = consumerAutoOffsetReset;
-    }
-
-    public String getConsumerValueDeserializer() {
-        return consumerValueDeserializer;
-    }
-
-    public void setConsumerValueDeserializer(String consumerValueDeserializer) {
-        this.consumerValueDeserializer = consumerValueDeserializer;
-    }
-
     @Bean
     public ConsumerFactory<String, String> consumerFactory() {
         // Creating a Map of string-object pairs
@@ -92,7 +39,6 @@ public class KafkaConfig {
         return new DefaultKafkaConsumerFactory<>(config);
     }
 
-    // Creating a Listener
     @Bean
     public ConcurrentKafkaListenerContainerFactory concurrentKafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<
@@ -103,7 +49,6 @@ public class KafkaConfig {
     }
 
     private void applyKafkaConfig(Map<String, Object> config) {
-        // Adding the Configuration
         config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         config.put(ConsumerConfig.GROUP_ID_CONFIG, consumerGroupId);
         config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);

@@ -1,4 +1,4 @@
-package com.example.kafkasample.jar_consumer;
+package com.example.kafkasample.multi_kafka_consumer;
 
 // Importing required classes
 import org.springframework.kafka.annotation.KafkaListener;
