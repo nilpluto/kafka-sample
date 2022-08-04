@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 @Setter
 @Configuration
 @ConfigurationProperties(prefix = "kafka")
-@ConfigurationPropertiesScan
 public class MultiKafkaConfig {
 
     @Autowired

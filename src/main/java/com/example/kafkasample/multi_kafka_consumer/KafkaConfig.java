@@ -17,10 +17,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 // Annotations
-@Configuration
-@ConfigurationPropertiesScan
 @Getter
 @Setter
+@Configuration
 public class KafkaConfig {
 
     private String bootstrapServers;
